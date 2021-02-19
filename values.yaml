@@ -249,6 +249,10 @@ webserver:
     timeoutSeconds: 30
     failureThreshold: 20
     periodSeconds: 5
+  strategy:  
+    type: RollingUpdate
+    rollingUpdate:
+      maxUnavailable: 1
 
   # Number of webservers
   replicas: 1

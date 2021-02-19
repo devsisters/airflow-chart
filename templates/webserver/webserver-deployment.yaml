@@ -17,9 +17,9 @@ metadata:
 spec:
   replicas: {{ .Values.webserver.replicas }}
   strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxUnavailable: 1
+    {{- with .Values.webserver.strategy }}
+    {{ toYaml . | nindent 4 }}
+    {{- end }}
   selector:
     matchLabels:
       tier: airflow
