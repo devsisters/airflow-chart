@@ -454,3 +454,7 @@ postgresql:
   enabled: true
   postgresqlPassword: postgres
   postgresqlUsername: postgres
+
+# Extra config objects for each deployments
+extraConfigFiles:
+  worker: {}

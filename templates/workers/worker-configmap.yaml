@@ -1,0 +1,17 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ template "airflow_extra_configs_worker" . }}
+  labels:
+    tier: airflow
+    component: config
+    release: {{ .Release.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    heritage: {{ .Release.Service }}
+{{- with .Values.labels }}
+{{ toYaml . | indent 4 }}
+{{- end }}
+data:
+  {{- range $key, $value := .Values.extraConfigFiles.worker }}
+  {{ $key }}: |- {{ $value | nindent 4 }}
+  {{- end }}

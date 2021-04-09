@@ -113,6 +113,9 @@ spec:
               mountPath: {{ template "airflow_local_setting_path" . }}
               subPath: airflow_local_settings.py
               readOnly: true
+            - name: extra-configs
+              mountPath: {{ template "airflow_extra_configs_dir" . }}
+              readOnly: true
           {{- include "airflow_environment_variables" . | indent 10 }}
 {{- if $persistence }}
         - name: worker-gc
@@ -126,6 +129,9 @@ spec:
         - name: config
           configMap:
             name: {{ template "airflow_config" . }}
+        - name: extra-configs
+          configMap:
+            name: {{ template "airflow_extra_configs_worker" . }}
 {{- if not $persistence }}
         - name: logs
           emptyDir: {}

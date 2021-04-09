@@ -225,6 +225,14 @@ log_connections = {{ .Values.pgbouncer.logConnections }}
 {{ (printf "%s-airflow-config" .Release.Name) }}
 {{- end }}
 
+{{ define "airflow_extra_configs_dir" -}}
+{{ (printf "%s/extra" .Values.airflowHome) | quote }}
+{{- end }}
+
+{{ define "airflow_extra_configs_worker" -}}
+{{ (printf "%s-airflow-extra-configs-worker" .Release.Name) }}
+{{- end }}
+
 {{ define "registry_docker_config" -}}
   {{- $host := .Values.registry.connection.host }}
   {{- $email := .Values.registry.connection.email }}
